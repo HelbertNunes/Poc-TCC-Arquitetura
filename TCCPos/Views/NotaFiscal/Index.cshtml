@@ -1,0 +1,56 @@
+﻿@model IEnumerable<TCCPos.Models.NotaFiscal>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Notas Fiscais</h1>
+
+<p>
+    <a asp-action="Create">Criar Nota fiscal</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Usuário
+            </th>
+            <th>
+                Valor Total
+            </th>
+            <th>
+                Data de Emissão
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataEmissao)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Cancelar Nota</a>
+                </td>
+            </tr>
+
+
+        }
+        
+    </tbody>
+</table>
+<div class="flex flex-row justify-content-end btn">
+    <form asp-controller="NotaFiscal" asp-action="EnviaNotas" method="post">
+        <button id="btnEnviaNotas" type="submit">Enviar para Prefeitura</button>
+    </form>
+</div>

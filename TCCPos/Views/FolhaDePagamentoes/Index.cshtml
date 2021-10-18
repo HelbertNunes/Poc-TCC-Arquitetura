@@ -1,0 +1,53 @@
+﻿@model IEnumerable<TCCPos.Models.FolhaDePagamento>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Folhas de Pagamento</h1>
+
+<p>
+    <a asp-action="Create">Criar Folha de Pagamento</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Mês de Referência
+            </th>
+            <th>
+                Valor
+            </th>
+            <th>
+                Última Alteração
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MesReferente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UltimaAlteracao)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div class="flex flex-row justify-content-end btn">
+    <form asp-controller="FolhaDePagamentoes" asp-action="IniciarPagamento" method="post">
+        <button id="btnIniciarPagamentos" type="submit">Iniciar Pagamentos</button>
+    </form>
+</div>
